@@ -1,0 +1,72 @@
+{
+    "name": "omarkhaled001/findex",
+    "description": "Fast Arabic & English search for Laravel that understands wrong keyboard layouts.",
+    "keywords": [
+        "laravel",
+        "search",
+        "arabic",
+        "normalization",
+        "keyboard-layout",
+        "fulltext",
+        "eloquent",
+        "findex"
+    ],
+    "homepage": "https://github.com/OmarKhaled001/findex",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Omar Khaled",
+            "homepage": "https://github.com/OmarKhaled001"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/OmarKhaled001/findex/issues",
+        "source": "https://github.com/OmarKhaled001/findex"
+    },
+    "require": {
+        "php": "^8.3",
+        "illuminate/console": "^13.0",
+        "illuminate/contracts": "^13.0",
+        "illuminate/database": "^13.0",
+        "illuminate/support": "^13.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.24",
+        "orchestra/testbench": "^11.0",
+        "pestphp/pest": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OmarKhaled\\Findex\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OmarKhaled\\Findex\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "lint": "pint",
+        "lint:test": "pint --test"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OmarKhaled\\Findex\\FindexServiceProvider"
+            ],
+            "aliases": {
+                "Findex": "OmarKhaled\\Findex\\Facades\\Findex"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
