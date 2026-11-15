@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-11-15
+
+### Fixed
+
+- Editors such as Intelephense (VS Code) no longer flag `Model::findex($term)->get()` with
+  "Not enough arguments" and "Expected type 'object'. Found 'void'". The scope is now declared as
+  `scopeFindex()`, and the trait documents `findex()` with a `@method` tag for autocompletion.
+  Calls are unchanged.
+
+## [1.0.0] - 2026-11-15
+
 ### Added
 
 - `Normalizer`: single-pass Arabic and Latin normalization (alef, ta marbuta, alef maqsura, hamza,
@@ -25,4 +36,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (MySQL / MariaDB) and GIN trigram (PostgreSQL) indexes.
 - `Reindexer` and the `findex:reindex` command to backfill existing rows.
 
-[Unreleased]: https://github.com/OmarKhaled001/findex/commits/main
+[Unreleased]: https://github.com/OmarKhaled001/findex/compare/v1.0.1...main
+[1.0.1]: https://github.com/OmarKhaled001/findex/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/OmarKhaled001/findex/releases/tag/v1.0.0

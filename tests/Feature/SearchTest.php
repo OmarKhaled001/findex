@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use OmarKhaled\Findex\Concerns\Findexable;
 use OmarKhaled\Findex\Tests\Fixtures\Category;
 use OmarKhaled\Findex\Tests\Fixtures\Product;
 
@@ -310,4 +312,17 @@ it('strips the definite article on both sides when enabled', function () {
     expect(names('بيت'))->toHaveCount(2)
         ->and(names('الكبير'))->toBe(['البيت الكبير'])
         ->and(names('كبير'))->toBe(['البيت الكبير']);
+});
+
+it('declares the scope so editors read Model::findex($term) as a query', function () {
+    // A method named findex() would make editors such as Intelephense check
+    // Product::findex($q) against it: one argument short, returning void.
+    $model = new ReflectionClass(Product::class);
+
+    expect($model->hasMethod('findex'))->toBeFalse()
+        ->and($model->getMethod('scopeFindex')->isPublic())->toBeTrue()
+        ->and((new ReflectionClass(Findexable::class))->getDocComment())
+        ->toContain('@method static Builder<static> findex(?string $term, ?string $driver = null)')
+        ->and(Product::findex('x'))->toBeInstanceOf(Builder::class)
+        ->and(Product::query()->findex('x'))->toBeInstanceOf(Builder::class);
 });

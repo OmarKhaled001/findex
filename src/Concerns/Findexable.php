@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OmarKhaled\Findex\Concerns;
 
 use Illuminate\Container\Container;
-use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use LogicException;
@@ -15,6 +14,8 @@ use OmarKhaled\Findex\Support\ValueExtractor;
 
 /**
  * Keeps a normalized search index column in sync and adds the findex() scope.
+ *
+ * @method static Builder<static> findex(?string $term, ?string $driver = null)
  *
  * @mixin Model
  */
@@ -110,8 +111,7 @@ trait Findexable
      * @param  Builder<static>  $query
      * @param  string|null  $driver  "like" or "fulltext". Defaults to the configured driver.
      */
-    #[Scope]
-    protected function findex(Builder $query, ?string $term, ?string $driver = null): void
+    public function scopeFindex(Builder $query, ?string $term, ?string $driver = null): void
     {
         Container::getInstance()->make(Findex::class)->apply(
             $query->getQuery(),
